@@ -1,8 +1,8 @@
-import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 
 import { RouterMedicoComponent } from './router-medico.component';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, EMPTY } from 'rxjs';
+import { Subject } from 'rxjs';
 
 class Fakerouter {
   navigate(params: any) {
@@ -11,7 +11,17 @@ class Fakerouter {
 }
 
 class Fakeactivatedroute {
-  params: Observable<any> = EMPTY;
+  // params: Observable<any> = EMPTY;
+
+  private subject = new Subject();
+
+  push(valor: any) {
+    this.subject.next(valor);
+  }
+
+  get params() {
+    return this.subject.asObservable();
+  }
 }
 
 describe('RouterMedicoComponent', () => {
@@ -21,7 +31,10 @@ describe('RouterMedicoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RouterMedicoComponent],
-      providers: [{ provide: Router, useClass: Fakerouter },{ provide: ActivatedRoute, useClass: Fakeactivatedroute } ],
+      providers: [
+        { provide: Router, useClass: Fakerouter },
+        { provide: ActivatedRoute, useClass: Fakeactivatedroute },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RouterMedicoComponent);
@@ -29,18 +42,35 @@ describe('RouterMedicoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('Redireccionar a medico cuando se guarde.', inject([Router], (router: Router)  => {
-    // const router = TestBed.get(Router);
-    const spy = spyOn(router, 'navigate');
+  it('Redireccionar a medico cuando se guarde.', inject(
+    [Router],
+    (router: Router) => {
+      // const router = TestBed.get(Router);
+      const spy = spyOn(router, 'navigate');
 
-    component.guardarMedico();
+      component.guardarMedico();
 
-    // console.log(spy);
+      // console.log(spy);
 
-    expect(spy).toHaveBeenCalledWith(['medico', '123'])
-  }));
+      expect(spy).toHaveBeenCalledWith(['medico', '123']);
+    }
+  ));
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
+
+  //se utiliza la función inject para obtener una instancia de ActivatedRoute y se inyecta como un parámetro en la función de prueba. Luego, se utiliza la función fakeAsync para ejecutar la prueba de forma sincrónica con el uso de tick para simular la resolución de la promesa de ActivatedRoute. Finalmente, se comprueba que el valor de component.id es 'nuevo'.
+  it('ID = nuevo', fakeAsync(inject([ActivatedRoute], (activatedRoute: Fakeactivatedroute) => {
+    activatedRoute.push({id: 'nuevo'});
+    tick();
+    expect(component.id).toBe('nuevo');
+  })));
+
+  // it('ID = nuevo', () => {
+
+  //   const activatedroute: Fakeactivatedroute = TestBed.get(ActivatedRoute);
+
+  //   activatedroute.push({id: 'nuevo'});
+
+  //   expect(component.id).toBe('nuevo')
+
   // });
 });
