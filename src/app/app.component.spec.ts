@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from "@angular/router/testing";
+import { RouterOutlet } from "@angular/router";
+import { By } from '@angular/platform-browser';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,6 +28,16 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('pruebas-angular');
   });
 
+  it('Debe tener un router outler', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+
+    const debugElement = fixture.debugElement.query(By.directive(RouterOutlet));
+
+    expect(debugElement).not.toBeNull();
+  });
+
+
+  //SKIPPED
   xit('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
