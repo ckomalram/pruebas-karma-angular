@@ -8,8 +8,8 @@ describe('Medico component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MedicoComponent]
-    })
+      declarations: [MedicoComponent],
+    });
     // .compileComponents();
   });
 
@@ -26,4 +26,13 @@ describe('Medico component', () => {
   it('Se debe crear componente', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Retornar nombre del medico', () => {
+    const nombre = 'Carlyle';
+
+    const rta = component.saludarMedico(nombre);
+
+    expect(rta).toContain(nombre);
+  });
+
 });
