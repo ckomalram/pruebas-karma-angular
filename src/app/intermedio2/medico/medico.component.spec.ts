@@ -1,5 +1,7 @@
 import { MedicoComponent } from './medico.component';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { MedicoService } from './medico.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('Medico component', () => {
   //definicion de variables
@@ -9,6 +11,8 @@ describe('Medico component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MedicoComponent],
+      providers: [MedicoService],
+      imports: [HttpClientModule]
     });
     // .compileComponents();
   });
@@ -34,5 +38,4 @@ describe('Medico component', () => {
 
     expect(rta).toContain(nombre);
   });
-
 });
