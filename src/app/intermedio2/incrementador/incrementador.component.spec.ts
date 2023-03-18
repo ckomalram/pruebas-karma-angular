@@ -31,4 +31,24 @@ describe('Incremendator Component', () => {
 
     expect(element.innerHTML).toContain('Carlyle Komalram');
   });
+
+  it('Detectar cambio del input progreso',  async () => {
+    component.cambiarValor(5);
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+    // fixture.whenStable().then(() => {
+    //   const input = fixture.debugElement.query(By.css('input'));
+
+    //   const element = input.nativeElement;
+    //   // console.log(element);
+
+    //   expect(element.value).toBe('55');
+    // });
+
+    const input = fixture.debugElement.query(By.css('input'));
+
+      const element = input.nativeElement;
+      expect(element.value).toBe('55');
+  });
 });
