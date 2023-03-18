@@ -3,7 +3,7 @@ import { IncrementadorComponent } from './incrementador.component';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-describe('Incremendator Component', () => {
+describe('Incremendator Component- Integracion html', () => {
   let component: IncrementadorComponent;
   let fixture: ComponentFixture<IncrementadorComponent>;
 
@@ -32,7 +32,7 @@ describe('Incremendator Component', () => {
     expect(element.innerHTML).toContain('Carlyle Komalram');
   });
 
-  it('Detectar cambio del input progreso',  async () => {
+  it('HTML: Detectar cambio del input progreso',  async () => {
     component.cambiarValor(5);
 
     fixture.detectChanges();
@@ -52,7 +52,7 @@ describe('Incremendator Component', () => {
       expect(element.value).toBe('55');
   });
 
-  it('Inc/decrementar en 5 al hacer click a los botones', () => {
+  it('HTML: Inc/decrementar en 5 al hacer click a los botones', () => {
 
     const botones = fixture.debugElement.queryAll(By.css('.btn-primary'));
     // console.log(botones);
