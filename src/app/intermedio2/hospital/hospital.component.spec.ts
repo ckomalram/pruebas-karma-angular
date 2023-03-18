@@ -6,18 +6,18 @@ describe('HospitalComponent', () => {
   let component: HospitalComponent;
   let fixture: ComponentFixture<HospitalComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach( () => {
+     TestBed.configureTestingModule({
       declarations: [ HospitalComponent ]
     })
-    .compileComponents();
+    // .compileComponents();
 
     fixture = TestBed.createComponent(HospitalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Hospital: Se debe crear componente', () => {
     expect(component).toBeTruthy();
   });
 });
