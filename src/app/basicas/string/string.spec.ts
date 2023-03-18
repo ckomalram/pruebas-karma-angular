@@ -7,4 +7,10 @@ describe('pruebas de strings', () => {
 
         expect(typeof rta).toBe('string');
     });
+
+    it('Debe regresar un saludo con nombre enviado', () => {
+      const nombre = 'Juan';
+      const rta = mensaje(nombre);
+      expect(rta).toContain('Saludos ' + nombre);
+  });
 });
