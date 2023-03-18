@@ -21,5 +21,11 @@ describe('Pruebas de clases', () => {
     expect(rta).toBe(50);
   });
 
+  it('Debe retornar 0 si recibe 101', () => {
+    // const player = new Player();
+    const rta = player.damage(101);
+    expect(rta).toBe(0);
+  });
+
 });
 
