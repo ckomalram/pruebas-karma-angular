@@ -65,4 +65,31 @@ describe('Incremendator Component', () => {
 
   });
 
+  it('HTML: Debe mostrar progreso actualizado',async  () => {
+    const botones = fixture.debugElement.queryAll(By.css('.btn-primary'));
+    const element: HTMLElement = fixture.debugElement.query(
+      By.css('h3')
+    ).nativeElement;
+
+    // console.log(botones);
+    // Js nativo
+    botones[0].triggerEventHandler('click', null);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+
+    expect(element.innerHTML).toContain('45');
+
+    botones[1].triggerEventHandler('click', null);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(element.innerHTML).toContain('50');
+
+
+
+
+
+  });
+
+
 });
