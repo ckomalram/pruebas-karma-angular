@@ -51,4 +51,18 @@ describe('Incremendator Component', () => {
       const element = input.nativeElement;
       expect(element.value).toBe('55');
   });
+
+  it('Inc/decrementar en 5 al hacer click a los botones', () => {
+
+    const botones = fixture.debugElement.queryAll(By.css('.btn-primary'));
+    // console.log(botones);
+    // Js nativo
+    botones[0].triggerEventHandler('click', null);
+    expect(component.progreso).toBe(45);
+
+    botones[1].triggerEventHandler('click', null);
+    expect(component.progreso).toBe(50);
+
+  });
+
 });
