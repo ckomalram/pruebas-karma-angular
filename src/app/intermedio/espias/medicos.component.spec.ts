@@ -45,17 +45,34 @@ describe('MedicosComponent', () => {
   });
 
   it('Si falla adición, mensaje error debe ser igual al error del serivicio', () => {
+    const customError = 'No se pudo agregar';
 
-    const customError ='No se pudo agregar';
-
-    spyOn(servicio,'agregarMedico').and.returnValue(
-      throwError(customError)
-    );
+    spyOn(servicio, 'agregarMedico').and.returnValue(throwError(customError));
 
     componente.agregarMedico();
 
     expect(componente.mensajeError).toBe(customError);
-
   });
 
+  it('delete: Llamar a servidor para borrar medico', () => {
+
+    // para aceptar pantalla emergente de confirmar borrar.
+    spyOn(window, 'confirm').and.returnValue(true);
+
+    const espia = spyOn(servicio, 'borrarMedico').and.returnValue(EMPTY);
+    componente.borrarMedico('1');
+
+    expect(espia).toHaveBeenCalledWith('1');
+  });
+
+  it('delete: No Llamar a servidor para borrar medico', () => {
+
+    // para aceptar pantalla emergente de confirmar borrar.
+    spyOn(window, 'confirm').and.returnValue(false);
+
+    const espia = spyOn(servicio, 'borrarMedico').and.returnValue(EMPTY);
+    componente.borrarMedico('1');
+
+    expect(espia).not.toHaveBeenCalledWith('1');
+  });
 });
