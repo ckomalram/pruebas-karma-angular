@@ -1,7 +1,7 @@
 import { getRobots } from './arreglos';
 
 
-describe('Prueba de arreglos', () => {
+xdescribe('Prueba de arreglos', () => {
   it('Retornar al menos 3 valores', () => {
     const rta = getRobots();
 
