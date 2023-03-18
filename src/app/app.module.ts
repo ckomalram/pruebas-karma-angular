@@ -10,10 +10,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from "@angular/router";
 import { RUTAS } from './avanzado/rutas/app.route';
+import { NavbarComponent } from './avanzado/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent, MedicosComponent, MedicoComponent, HospitalComponent, IncrementadorComponent
+    AppComponent, MedicosComponent, MedicoComponent, HospitalComponent, IncrementadorComponent, NavbarComponent
   ],
   imports: [
     BrowserModule,CommonModule,FormsModule,    RouterModule.forRoot(RUTAS)

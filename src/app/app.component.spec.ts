@@ -3,14 +3,20 @@ import { AppComponent } from './app.component';
 import { RouterTestingModule } from "@angular/router/testing";
 import { RouterOutlet, RouterLinkWithHref } from "@angular/router";
 import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/compiler';
+import { NavbarComponent } from './avanzado/navbar/navbar.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        NavbarComponent
       ],
       imports:[
         RouterTestingModule.withRoutes([])
+      ],
+      schemas:[
+        NO_ERRORS_SCHEMA
       ]
 
     }).compileComponents();
@@ -34,22 +40,6 @@ describe('AppComponent', () => {
     const debugElement = fixture.debugElement.query(By.directive(RouterOutlet));
 
     expect(debugElement).not.toBeNull();
-  });
-
-  it('Debe tener un link a pagina de medicos', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-
-    const elementos = fixture.debugElement.queryAll(By.directive(RouterLinkWithHref));
-    // console.log(elementos);
-    let existe = false;
-    elementos.forEach(element => {
-      if (element.attributes['routerLink'] === '/medicos') {
-        existe = true;
-      }
-    });
-
-
-    expect(existe).toBeTruthy();
   });
 
 
