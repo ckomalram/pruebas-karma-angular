@@ -1,13 +1,13 @@
 import { MedicosComponent } from './medicos.component';
-
 import { MedicosService } from './medicos.service';
-import { from, EMPTY } from 'rxjs';
+
+import { from, EMPTY, Observable } from 'rxjs';
 
 describe('MedicosComponent', () => {
   let componente: MedicosComponent;
 
   // Crear el spía http
-  const spy = jasmine.createSpyObj('http', ['get','post', 'delete']);
+  const spy = jasmine.createSpyObj('http', ['get', 'post', 'delete']);
 
   const servicio = new MedicosService(spy);
 
@@ -25,7 +25,6 @@ describe('MedicosComponent', () => {
   });
 
   it('Llamar servicio para agregar medico', () => {
-
     const espia = spyOn(servicio, 'agregarMedico').and.callFake((medico) => {
       return EMPTY;
     });
@@ -33,9 +32,15 @@ describe('MedicosComponent', () => {
     componente.agregarMedico();
 
     expect(espia).toHaveBeenCalled();
-
-
-
   });
 
+  it('Agregar un nuevo medico al arreglo', () => {
+    const medico = { id: 1, name: 'Carlyle' };
+
+    spyOn(servicio, 'agregarMedico').and.returnValue(from([medico]));
+
+    componente.agregarMedico();
+
+    expect(componente.medicos.indexOf(medico)).toBeGreaterThanOrEqual(0);
+  });
 });
